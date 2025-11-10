@@ -1,0 +1,43 @@
+# wordpress-app.yaml
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: wordpress
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: 'https://charts.bitnami.com/bitnami' # The Helm chart repo
+    targetRevision: 20.3.6 # Use a chart version that supports these tags
+    chart: wordpress
+    helm:
+      values: | # All our custom settings
+        wordpressPassword: YourSecurePassword123
+        mariadb:
+          rootUser:
+            password: YourMariaDBPassword123
+        service:
+          type: NodePort
+
+        # --- THIS IS THE KEY PART ---
+        # Tell Helm to pull images from our private Harbor registry
+        image:
+          registry: 192.168.81.130:30003
+          repository: wordpress/wordpress # (Project/Image)
+          tag: "latest" # STABLE tag
+        mariadb:
+          image:
+            registry: 192.168.81.130:30003
+            repository: wordpress/mariadb # (Project/Image)
+            tag: "latest" # STABLE tag
+
+  destination:
+    server: 'https://kubernetes.default.svc'
+    namespace: wordpress # Deploy the app in its own namespace 
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true # Tell Argo to create the 'wordpress' namespace
+
