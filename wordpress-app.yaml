@@ -8,7 +8,7 @@ spec:
   project: default
   source:
     repoURL: 'https://charts.bitnami.com/bitnami' # The Helm chart repo
-    targetRevision: 20.3.6 # Use a chart version that supports these tags
+    targetRevision: 20.4.1 # Use a chart version that supports these tags
     chart: wordpress
     helm:
       values: | # All our custom settings
