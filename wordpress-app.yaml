@@ -7,7 +7,7 @@ metadata:
 spec:
   project: default
   source:
-    repoURL: '[https://wordpress-helm.github.io/charts/](https://wordpress-helm.github.io/charts/)' # The NEW, CORRECT Community chart repo
+    repoURL: 'https://wordpress-helm.github.io/charts/' # The NEW, CORRECT Community chart repo
     targetRevision: 21.1.0 # A recent, stable chart version
     chart: wordpress
     helm:
@@ -31,7 +31,7 @@ spec:
           tag: "6.6" # STABLE tag
 
   destination:
-    server: '[https://kubernetes.default.svc](https://kubernetes.default.svc)'
+    server: '(https://kubernetes.default.svc'
     namespace: wordpress # Deploy the app in its own namespace
   syncPolicy:
     automated:
