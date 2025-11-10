@@ -33,7 +33,7 @@ spec:
 
   destination:
     server: 'https://kubernetes.default.svc'
-    namespace: wordpress # Deploy the app in its own namespace
+    namespace: wordpress # Deploy the app in its own namespace 
   syncPolicy:
     automated:
       prune: true
